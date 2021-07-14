@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="row justify-content-center mt-5 mb-5">
+      <div class="col-md-6" >
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <div class="mb-3">
+            <label for="lat" class="form-label">Lattitude</label>
+            <input [disabled]="apiSpinnerVisible" class="form-control" id="lattitude" aria-describedby="lattitude" formControlName="lat">
+            <div *ngIf="lat?.touched && lat?.invalid"class="form-text alert alert-danger">
+                <div *ngIf="lat?.errors?.required">Lattitude is required.</div>
+                <div *ngIf="lat?.errors?.invalidLat">Must be a number between -90 & 90.</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="lon" class="form-label">Longitude</label>
+            <input [disabled]="apiSpinnerVisible" class="form-control" id="longitude" aria-describedby="longitude" formControlName="lon">
+            <div *ngIf="lon?.touched && lon?.invalid"class="form-text alert alert-danger">
+                <div *ngIf="lon?.errors?.required">Longitude is required.</div>
+                <div *ngIf="lon?.errors?.invalidLon">Longitude must be a number between -180 & 180.</div>
+            </div>
+        </div>
+          <!-- TODO Add disable button if form invalid -->
+          <button [disabled]="apiSpinnerVisible || form.invalid" type="submit" class="btn btn-primary">Submit</button>
+
+          <div *ngIf="apiSpinnerVisible" class="form-text alert alert-info">Fetching Weather Data ...</div>
+          <div *ngIf="apiErrorVisible" class="form-text alert alert-danger">Error: {{apiErrorMessage}}</div>
+
+        </form>     
+      </div>
+  
+    </div>
+  
+    <div class = "row justify-content-center mt-5 mb-5">
+      <hr class="col-md-8">
+    </div>
+  
+
+
+
+    <div *ngIf="weatherReportVisible">
+        <div  class="row justify-content-center mt-5">
+            <div class="col-md-6 text-center">
+              <h1>
+                Location: {{weatherData?.lat}}, {{weatherData?.lon}} - <a style="text-decoration: none;" target="_blank" href='https://www.google.com/maps/@{{weatherData?.lat}},{{weatherData?.lon}},10z'>Map</a>
+              </h1>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6 text-center">
+                <img src="http://openweathermap.org/img/wn/{{weatherData?.weatherIcon}}@2x.png">
+            </div>
+        </div>
+        
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6 text-center">
+                <h3>
+                {{weatherData?.currentTemp}}&deg; - {{weatherData?.tempDescription}}
+                </h3>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6 text-center">
+                <h3>
+                {{weatherData?.weatherDescription}}
+                </h3>
+            </div>
+        </div>
+        
+        <div *ngFor="let alert of weatherData?.alerts;"class="row justify-content-center mt-4">
+            <div class="col-md-6 text-left">
+                <h4 class="alert alert-danger">
+                Alert - {{alert?.event}}
+                </h4>
+
+                <!-- Start Time and End Times From API Are not Accurate -->
+                <!-- <h5>
+                    Start: {{alert?.start | date: "shortDate"}} {{alert?.start | date: "shortTime"}}
+                </h5>
+
+                <h5>
+                    End: {{alert?.end | date: "shortDate"}} {{alert?.end | date: "shortTime"}}
+                </h5> -->
+
+                <h4>
+                {{alert?.description}}
+                </h4>
+            </div>
+        </div>
+
+        
+        
+
+    </div>
+    
+  
+  </div>

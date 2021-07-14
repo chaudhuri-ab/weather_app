@@ -23,6 +23,8 @@ RUN INSTRUCTIONS:
         - angular cli (Only if you want to generate dist files for frontend): npm install -g @angular/cli
 
     
+    - clone the respo 
+    
     - cd into project root directory
 
     - run: npm install
@@ -39,12 +41,13 @@ RUN INSTRUCTIONS:
 
     - Now you will have a node server listening on port 3000 on localHost
 
-    - Open a browswer and navigate to: http://localhost:3000/api?lat=30.3119&lon=95.4561
+    - Open a browswer and navigate to: http://localhost:3000
 
-    - You will see the raw response for weather data in Conroe, Texas
+    - Enter a valid Longitude and Lattitude (e.g. lat=30.3119&lon=95.4561 for Conroe, TX). The application should query the API server and then the API server will query the OpenWeather API.
 
     
-
+ISSUES:
+    - It seems like the start and end date on alerts were always UNIX timestamps from 1970 so I ommitted them.
 
 
 NOTES AND REFERENCES:
@@ -68,4 +71,53 @@ NOTES AND REFERENCES:
         - lat
 
 
+SAMPLE OPENWEATHER DATA:
 
+    NYC 
+    weatherData:WeatherData =
+    {
+    "lat": "40.7128",
+    "lon": "-74.0060",
+    "weatherDescription": "Clear Sky",
+    "weatherIcon": "01d",
+    "currentTemp": 81,
+    "tempDescription": "Hot",
+    "alerts": [
+        {
+            "sender_name": "NWS New York City - Upton (Long Island and New York City)",
+            "event": "Marine Weather Statement",
+            "start": 1626299880,
+            "end": 1626307200,
+            "description": "... STRONG THUNDERSTORMS APPROACHING THE WATERS...\nThe areas affected include...\nSandy Hook NJ to Fire Island Inlet NY out 20 NM...\nNew York Harbor...\nAt 630 PM EDT, Doppler radar indicated strong thunderstorms, capable\nof producing winds to around 30 knots. The thunderstorms were\ncentered about 12 nm southwest of Cliffwood Beach, moving east at 25\nknots.",
+            "tags": [
+                "Marine event"
+            ]
+        }
+    ]
+    }
+
+    Sample Doc Data
+     weatherData:WeatherData = {
+    "lat": "30.3119",
+    "lon": "-95.4561",
+    "weatherDescription": "Scattered Clouds",
+    "weatherIcon": "03d",
+    "currentTemp": 82,
+    "tempDescription": "Hot",
+    "alerts": [
+      {
+        "sender_name": "NWS Tulsa",
+        "event": "Heat Advisory",
+        "start": 1597341600,
+        "end": 1597366800,
+        "description": "...HEAT ADVISORY REMAINS IN EFFECT FROM 1 PM THIS AFTERNOON TO\n8 PM CDT THIS EVENING...\n* WHAT...Heat index values of 105 to 109 degrees expected.\n* WHERE...Creek, Okfuskee, Okmulgee, McIntosh, Pittsburg,\nLatimer, Pushmataha, and Choctaw Counties.\n* WHEN...From 1 PM to 8 PM CDT Thursday.\n* IMPACTS...The combination of hot temperatures and high\nhumidity will combine to create a dangerous situation in which\nheat illnesses are possible."
+      },
+      {
+        "sender_name": "NWS TX",
+        "event": "Storm Advisory",
+        "start": 1597341600,
+        "end": 1597366800,
+        "description": "...HEAT ADVISORY REMAINS IN EFFECT FROM 1 PM THIS AFTERNOON TO\n8 PM CDT THIS EVENING...\n* WHAT...Heat index values of 105 to 109 degrees expected.\n* WHERE...Creek, Okfuskee, Okmulgee, McIntosh, Pittsburg,\nLatimer, Pushmataha, and Choctaw Counties.\n* WHEN...From 1 PM to 8 PM CDT Thursday.\n* IMPACTS...The combination of hot temperatures and high\nhumidity will combine to create a dangerous situation in which\nheat illnesses are possible."
+      }
+    ]
+}

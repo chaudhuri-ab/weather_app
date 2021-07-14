@@ -7,7 +7,7 @@ const formatter = require("../../shared_modules/formatting");
 
 
 const router = express.Router();
-var errorResponseMessage = {errorMessage: ""};
+var errorResponseMessage = {message: ""};
 
 
 
@@ -29,7 +29,7 @@ router.get("/", (req, res) => {
     ){
 
         //Invalid Longitude & Lattitude
-        errorResponseMessage.errorMessage = "Invalid Longitude and/or Lattitude"
+        errorResponseMessage.message = "Invalid Longitude and/or Lattitude"
         res.status(400).json(errorResponseMessage);
         return;
     }
@@ -41,7 +41,7 @@ router.get("/", (req, res) => {
     const appID = "47e9e5bb0bb6ed51f76626fe94c5f32e";
 
     //Construct Open Weather URL
-    let openWeatherURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=-${lon}&appid=${appID}&units=imperial&exclude=hourly,daily,minutely`
+    let openWeatherURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${appID}&units=imperial&exclude=hourly,daily,minutely`
    
 
     //Properly Handle JSON Resp
@@ -53,26 +53,28 @@ router.get("/", (req, res) => {
             try{
                 jsonData = JSON.parse(d);
             }catch(error){
-                errorResponseMessage.errorMessage = "Bad Server Response. Please Try Again"
+                errorResponseMessage.message = "Bad Server Response. Please Try Again"
                 res.status(502).json(errorResponseMessage);
                 return;
             }
 
             //Make Sure Critical Data is Present
-            if(
+            if( 
                 jsonData?.current?.weather == undefined
                 || jsonData.current.weather.length == 0
                 || jsonData.current.weather[0]?.description == undefined
                 || jsonData.current?.temp == undefined
             ){
                 //Open Weather API Failed
-                errorResponseMessage.errorMessage = "Missing Weather Data. Please Try Again"
+                console.log(jsonData);
+                let errMessage = jsonData?.message ? jsonData.message : "Bad Server Response. Please Try Again"; 
+                errorResponseMessage.message = formatter.capFirstLetter(errMessage);
                 res.status(502).json(errorResponseMessage);
                 return;
             }
 
             //Create Temp Description - Based on temp ranges I use to decide what insulation level to wear on a motorcycle
-            let currentTemp = jsonData.current.temp;
+            let currentTemp = Math.round(jsonData.current.temp);
             let tempDescription = ""
 
             if(currentTemp <= 32){
@@ -93,11 +95,13 @@ router.get("/", (req, res) => {
 
             //Create JSON Response Object & Return to Client
             let responseJSON = {
+                lat: lat,
+                lon: lon,
                 weatherDescription: formatter.capFirstLetter(jsonData.current.weather[0].description),
                 weatherIcon: jsonData.current.weather[0]?.icon,
                 currentTemp: currentTemp,
                 tempDescription: tempDescription,
-                alerts: jsonData?.alerts
+                alerts: jsonData?.alerts ? jsonData?.alerts : []
             }
 
             res.json(responseJSON);            
@@ -109,7 +113,7 @@ router.get("/", (req, res) => {
         console.error("Err " + error)
 
         //Open Weather API Failed
-        errorResponseMessage.errorMessage = "Service Not Available. Please Try Again"
+        errorResponseMessage.message = "Service Not Available. Please Try Again"
         res.status(502).json(errorResponseMessage);
     })
     
