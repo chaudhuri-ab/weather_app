@@ -16,11 +16,9 @@ export class WeatherReportComponent implements OnInit {
   apiSpinnerVisible = false;
   apiErrorVisible = false;
   apiErrorMessage = "";
-
   //
 
   weatherData = {} as WeatherData;
-  //
 
   form = new FormGroup(
     {
@@ -38,10 +36,12 @@ export class WeatherReportComponent implements OnInit {
     } 
   )
 
+  //Lattitude from form
   get lat(){
     return this.form.get("lat");
   }
 
+  //Longitude from form
   get lon(){
     return this.form.get("lon");
   }
@@ -53,8 +53,10 @@ export class WeatherReportComponent implements OnInit {
 
   }
 
+  /**
+   * Called when form is submitted
+   */
   submit(){
-
     //Update UI to Initiate API Req State
     this.weatherReportVisible = false;
     this.apiSpinnerVisible = true;
@@ -63,13 +65,11 @@ export class WeatherReportComponent implements OnInit {
 
     this.weatherService.getWeatherData(this.lat?.value, this.lon?.value).subscribe(
       data => {
-        console.log(data);
         this.weatherData = data as WeatherData;
         this.weatherReportVisible = true;
 
       },
       err => {
-        console.log(err);
         if(err?.status == 502 && err?.error?.message){
           this.apiErrorMessage = err?.error?.message;
         }else{
@@ -79,7 +79,6 @@ export class WeatherReportComponent implements OnInit {
 
       }
     ).add(() => {
-        console.log("done");
         //Update UI to End API Req State
         this.apiSpinnerVisible = false;
         //

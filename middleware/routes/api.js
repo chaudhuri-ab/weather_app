@@ -11,7 +11,6 @@ var errorResponseMessage = {message: ""};
 
 
 
-
 /**
  *  Get current weather information and alerts for client request
  */

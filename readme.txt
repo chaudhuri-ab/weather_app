@@ -20,7 +20,7 @@ PROBLEM STATEMENT:
 RUN INSTRUCTIONS:
     Note you will need to install:
         - node - https://nodejs.org/en/download/
-        - angular cli (Only if you want to generate dist files for frontend): npm install -g @angular/cli
+        - angular cli: npm install -g @angular/cli
 
     
     - clone the respo 
@@ -41,7 +41,7 @@ RUN INSTRUCTIONS:
 
     - Now you will have a node server listening on port 3000 on localHost
 
-    - Open a browswer and navigate to: http://localhost:3000
+    - Open a browser and navigate to: http://localhost:3000
 
     - Enter a valid Longitude and Lattitude (e.g. lat=30.3119&lon=95.4561 for Conroe, TX). The application should query the API server and then the API server will query the OpenWeather API.
 
