@@ -23,7 +23,7 @@ RUN INSTRUCTIONS:
         - angular cli: npm install -g @angular/cli
 
     
-    - clone the respo 
+    - clone the repo 
 
     - cd into project root directory
 

@@ -1,5 +1,3 @@
-const e = require("express");
-const { json } = require("express");
 const express = require("express");
 const https = require('https')
 const formatter = require("../../shared_modules/formatting");
