@@ -3,10 +3,10 @@
       <div class="col-md-6" >
         <form [formGroup]="form" (ngSubmit)="submit()">
           <div class="mb-3">
-            <label for="lat" class="form-label">Lattitude</label>
-            <input [disabled]="apiSpinnerVisible" class="form-control" id="lattitude" aria-describedby="lattitude" formControlName="lat">
+            <label for="latitude" class="form-label">Latitude</label>
+            <input [disabled]="apiSpinnerVisible" class="form-control" id="latitude" aria-describedby="latitude" formControlName="lat">
             <div *ngIf="lat?.touched && lat?.invalid"class="form-text alert alert-danger">
-                <div *ngIf="lat?.errors?.required">Lattitude is required.</div>
+                <div *ngIf="lat?.errors?.required">Latitude is required.</div>
                 <div *ngIf="lat?.errors?.invalidLat">Must be a number between -90 & 90.</div>
             </div>
           </div>

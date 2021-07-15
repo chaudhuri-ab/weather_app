@@ -2,7 +2,7 @@ import { AbstractControl, ValidationErrors } from "@angular/forms";
 
 
 export class GPS_CoordinatesValidator{
-    static validLattitude(control:AbstractControl) : ValidationErrors | null{
+    static validLatitude(control:AbstractControl) : ValidationErrors | null{
         let lat = Number(control.value);
         if(lat != NaN && lat >= -90 && lat <= 90){
             return null;

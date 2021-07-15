@@ -10,9 +10,9 @@ export class WeatherService {
   constructor(private http:HttpClient) { }
 
   /**
-   * Request API server for weather data based on longitude and lattitude
+   * Request API server for weather data based on longitude and latitude
    * provided
-   * @param lat - lattitude
+   * @param lat - latitude
    * @param lon - longitude
    * returns WeatherData or 
    */

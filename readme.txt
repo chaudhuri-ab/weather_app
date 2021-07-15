@@ -43,7 +43,7 @@ RUN INSTRUCTIONS:
 
     - Open a browser and navigate to: http://localhost:3000
 
-    - Enter a valid Longitude and Lattitude (e.g. lat=30.3119&lon=95.4561 for Conroe, TX). The application should query the API server and then the API server will query the OpenWeather API.
+    - Enter a valid Longitude and Latitude (e.g. lat=30.3119&lon=95.4561 for Conroe, TX). The application should query the API server and then the API server will query the OpenWeather API.
 
     
 ISSUES:
@@ -53,7 +53,7 @@ ISSUES:
 NOTES AND REFERENCES:
     - FAQ Long/Lat: https://journeynorth.org/tm/LongitudeIntro.html:
         - Longitude Range = -180 to 180 (neg is West)
-        - Lattitude Range = -90 to 90   (neg is South)
+        - Latitude Range = -90 to 90   (neg is South)
 
     - Sample Data Conroe, TX: https://api.openweathermap.org/data/2.5/onecall?lat=30.3119&lon=-95.4561&appid=47e9e5bb0bb6ed51f76626fe94c5f32e&units=imperial&exclude=hourly,daily,minutely
         - Relevant Values

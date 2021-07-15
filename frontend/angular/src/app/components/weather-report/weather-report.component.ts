@@ -25,7 +25,7 @@ export class WeatherReportComponent implements OnInit {
       lat: new FormControl('30.3119', 
       [
         Validators.required,
-        GPS_CoordinatesValidator.validLattitude
+        GPS_CoordinatesValidator.validLatitude
       ]),
       lon: new FormControl('-95.4561',
       [
@@ -36,7 +36,7 @@ export class WeatherReportComponent implements OnInit {
     } 
   )
 
-  //Lattitude from form
+  //Latitude from form
   get lat(){
     return this.form.get("lat");
   }

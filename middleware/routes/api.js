@@ -27,8 +27,8 @@ router.get("/", (req, res) => {
         || req.query.lon > 180    
     ){
 
-        //Invalid Longitude & Lattitude
-        errorResponseMessage.message = "Invalid Longitude and/or Lattitude"
+        //Invalid Longitude & Latitude
+        errorResponseMessage.message = "Invalid Longitude and/or Latitude"
         res.status(400).json(errorResponseMessage);
         return;
     }
