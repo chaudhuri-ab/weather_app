@@ -24,7 +24,7 @@ RUN INSTRUCTIONS:
 
     
     - clone the respo 
-    
+
     - cd into project root directory
 
     - run: npm install
@@ -33,7 +33,7 @@ RUN INSTRUCTIONS:
 
     - run npm install
 
-    - run npm build
+    - run ng build --prod
 
     - cd into project root directory
 
